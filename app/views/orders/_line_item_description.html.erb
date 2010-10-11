@@ -1,0 +1,11 @@
+<% if line_item.gift_card %>
+  <h4><%= t(:gift_card) %> <%= number_to_currency(variant.price) %> for 
+      <%= line_item.gift_card.name %> (<%= line_item.gift_card.email %>)</h4>
+  <p>
+    <%= truncate(line_item.gift_card.note, :length => 100, :omission => "...") %>
+  </p>
+<% else %>
+  <h4><%= link_to variant.product.name,  product_path(variant.product) %></h4>
+  <%= variant_options variant %>
+  <%= truncate(variant.product.description, :length => 100, :omission => "...") %>
+<% end %>
