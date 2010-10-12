@@ -18,6 +18,28 @@ class GiftCardsController < Spree::BaseController
     end
   end
   
+  def activate
+    @gift_card = GiftCard.find_by_token(params[:id])
+    if @gift_card.is_received
+      flash[:error] = "You can't activate this gift card, b/c it was already activated."
+      redirect_to root_url
+      return
+    else
+      @gift_card.update_attribute(:is_received, true)
+    end
+    if current_user && !current_user.anonymous?
+      if @gift_card.register(current_user)
+        flash[:notice] = "Gift card activated, now you have store credit and can use it to pay for purchases in full or in part"
+      else
+        flash[:error] = "Couldn't register gift card"
+      end
+    else
+      session[:gift_card] = @gift_card.token
+      flash[:notice] = "To use gift card you should sign up or log in if you're already registered."      
+    end
+    redirect_to root_url
+  end
+  
   private
   
   def find_gift_card_variants

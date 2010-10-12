@@ -7,6 +7,15 @@ class GiftCard < ActiveRecord::Base
   
   before_create :generate_token
   
+  def price
+    self.line_item ? self.line_item.price * self.line_item.quantity : self.variant.price
+  end
+  
+  def register(user)
+    StoreCredit.create(:amount => self.price, :remaining_amount => self.price, 
+                       :reason => 'gift card', :user => user)
+  end
+  
   private
   
 	def generate_token
