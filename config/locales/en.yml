@@ -3,3 +3,10 @@ en:
   gift_card: "Gift card"
   gift_cards: "Gift cards"
   is_gift_card: "is gift card"
+  recipient_name: "Recipient name"
+  gift_card_messages:
+    activated: "Gift card activated, now you have store credit and can use it to pay for purchases in full or in part"
+    authorization_required: "To use gift card you should sign up or log in if you're already registered."
+    cant_activate: "You can't activate this gift card, b/c it was already activated."
+    register_error: "Couldn't register gift card"
+
