@@ -7,6 +7,8 @@ class GiftCard < ActiveRecord::Base
   
   before_create :generate_token
   
+  attr_accessible :name, :email, :note, :variant_id
+  
   def price
     self.line_item ? self.line_item.price * self.line_item.quantity : self.variant.price
   end

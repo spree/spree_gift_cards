@@ -1,4 +1,5 @@
 en:
+  already_received: "already received"
   buy_gift_card: "Buy gift card"
   gift_card: "Gift card"
   gift_cards: "Gift cards"
@@ -9,4 +10,5 @@ en:
     authorization_required: "To use gift card you should sign up or log in if you're already registered."
     cant_activate: "You can't activate this gift card, b/c it was already activated."
     register_error: "Couldn't register gift card"
+    successfully_updated: "Gift card was successfully updated!"
 

@@ -1,0 +1,19 @@
+<h1><%= t(:gift_card) %></h1>
+<%= render "shared/error_messages", :target => @gift_card %>
+<%= form_for @gift_card do |f| %>
+  <%= f.field_container :email do %>
+    <%= f.label :email, t("email") %> <span class="required">*</span><br />
+    <%= f.text_field :email %>
+  <% end %>
+  <%= f.field_container :name do %>
+    <%= f.label :name, t("recipient_name") %> <span class="required">*</span><br />
+    <%= f.text_field :name %>
+  <% end %>
+  <%= f.field_container :note do %>
+    <%= f.label :note, t("note") %><br />
+    <%= f.text_area :note, :rows => 10 %>
+  <% end %> 
+  <button type='submit' class='large primary'>
+    <%= image_tag('/images/update.png') + ' ' + t('update') %>
+  </button>
+<% end %>

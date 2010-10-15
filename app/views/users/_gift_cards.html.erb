@@ -1,0 +1,26 @@
+<% if @user.gift_cards.present? %>
+<h2><%= t("gift_cards") %></h2>
+
+<table class="order-summary" width="545">
+  <thead>
+    <tr>
+      <th><%= t("gift_card") %></th>
+      <th><%= t("email") %></th>
+      <th><%= t("recipient_name") %></th>
+      <th><%= t("note") %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @user.gift_cards.each do |card| %>
+    <tr class="<%= cycle('even', 'odd') %>">
+      <td><%= t(:gift_card)%> <%= number_to_currency(card.price) %></td>
+      <td><%= card.email %></td>
+      <td><%= card.name %></td>
+      <td><%= truncate(card.note, :length => 50, :omission => "...") %></td>
+      <td><%= card.is_received ? t('already_received') : link_to(t(:edit), edit_gift_card_url(card)) %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<% end %>
