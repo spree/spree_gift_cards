@@ -48,11 +48,13 @@ gems
     def install_gems
       system("cd spec/test_app && rake spree_core:install")
       system("cd spec/test_app && rake spree_auth:install")
-      generate 'spree_store_credits:install -f'     
+      generate 'spree_store_credits:install -f'
+      generate 'spree_gift_cards:install -f'
     end
 
     def migrate_db
       run_migrations
+      generate 'spree_gift_cards:seed'
     end
   end
   AuthTestAppGenerator.start

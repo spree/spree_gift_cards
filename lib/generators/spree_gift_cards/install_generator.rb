@@ -8,12 +8,6 @@ module SpreeGiftCards
       def copy_migrations
         directory "db"
       end
-
-      def run_db_seeds
-        system("cd #{Rails.root} && rake db:migrate RAILS_ENV=#{Rails.env}")
-        seed_file = File.join(File.expand_path("../../../../db", __FILE__), "seeds.rb")
-        load(seed_file) if File.exist?(seed_file)
-      end
     end
   end
 end
