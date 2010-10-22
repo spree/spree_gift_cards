@@ -10,7 +10,7 @@ module SpreeGiftCards
       Dir.glob(File.join(File.dirname(__FILE__), "../app/**/*_decorator*.rb")) do |c|
         Rails.env == "production" ? require(c) : load(c)
       end
-      
+
       User.has_many :gift_cards
       LineItem.has_one :gift_card
     end

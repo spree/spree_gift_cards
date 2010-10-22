@@ -4,7 +4,7 @@ UserSessionsController.class_eval do
   private
 
   def register_gift_card
-    return if session[:gift_card].nil?
+    return if session[:gift_card].nil? or current_user.nil?
     @gift_card = GiftCard.find_by_token(session[:gift_card])
     if @gift_card.register(current_user)
       flash[:notice] = t("gift_card_messages.activated")

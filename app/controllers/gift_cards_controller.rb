@@ -4,7 +4,7 @@ class GiftCardsController < Spree::BaseController
     find_gift_card_variants
     @gift_card = GiftCard.new
   end
-  
+
   def create
     @gift_card = GiftCard.new(params[:gift_card])
     if @gift_card.save
@@ -19,12 +19,12 @@ class GiftCardsController < Spree::BaseController
       render :action => :new
     end
   end
-  
+
   def edit
     @gift_card = GiftCard.find(params[:id])
     access_forbidden unless @gift_card && @gift_card.user == current_user
   end
-  
+
   def update
     @gift_card = GiftCard.find(params[:id])
     access_forbidden unless @gift_card && @gift_card.user == current_user && !@gift_card.is_received?
@@ -37,16 +37,15 @@ class GiftCardsController < Spree::BaseController
       render :action => :edit
     end
   end
-  
+
   def activate
     @gift_card = GiftCard.find_by_token(params[:id])
     if @gift_card.is_received
       flash[:error] = t("gift_card_messages.cant_activate")
       redirect_to root_url
       return
-    else
-      @gift_card.update_attribute(:is_received, true)
     end
+
     if current_user && !current_user.anonymous?
       if @gift_card.register(current_user)
         flash[:notice] = t("gift_card_messages.activated")
@@ -59,9 +58,9 @@ class GiftCardsController < Spree::BaseController
     end
     redirect_to root_url
   end
-  
+
   private
-  
+
   def find_gift_card_variants
     gift_card_product_ids = Product.not_deleted.where(["is_gift_card = ?", true]).map(&:id)
     @gift_card_variants = Variant.where(["price > 0 AND product_id IN (?)", gift_card_product_ids]).order("price")
