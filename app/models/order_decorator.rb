@@ -9,4 +9,9 @@ Order.class_eval do
   end
   alias_method_chain :finalize!, :gift_card
 
+  def contains?(variant)
+    return false if variant.product.is_gift_card?
+    line_items.detect{|line_item| line_item.variant_id == variant.id}
+  end
+
 end
