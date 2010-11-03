@@ -4,7 +4,7 @@ Order.class_eval do
   def finalize_with_gift_card!
     finalize_without_gift_card!
     self.line_items.each do |li|
-      OrderMailer.gift_card_email(li.gift_card).deliver if li.gift_card
+      OrderMailer.gift_card_email(li.gift_card, self).deliver if li.gift_card
     end
   end
   alias_method_chain :finalize!, :gift_card
