@@ -1,4 +1,4 @@
-OrderMailer.class_eval do
+Spree::OrderMailer.class_eval do
   def gift_card_email(card, order)
     @gift_card = card
     @order = order

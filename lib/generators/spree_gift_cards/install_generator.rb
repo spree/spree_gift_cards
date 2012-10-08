@@ -1,13 +1,20 @@
 module SpreeGiftCards
   module Generators
     class InstallGenerator < Rails::Generators::Base
-      source_root File.expand_path("../../templates", __FILE__)
 
-      desc "Configures your Rails application for use with spree_gift_cards"
-
-      def copy_migrations
-        directory "db"
+      def add_migrations
+        run 'rake railties:install:migrations FROM=spree_gift_cards'
       end
+
+      def run_migrations
+        res = ask "Would you like to run the migrations now? [Y/n]"
+        if res == "" || res.downcase == "y"
+          run 'rake db:migrate'
+        else
+          puts "Skipping rake db:migrate, don't forget to run it!"
+        end
+      end
+
     end
   end
 end
