@@ -1,4 +1,4 @@
-UsersController.class_eval do
+Spree::UsersController.class_eval do
   after_filter :register_gift_card, :only => :create
 
   private

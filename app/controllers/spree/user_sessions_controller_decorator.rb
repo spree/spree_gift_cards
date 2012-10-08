@@ -1,4 +1,4 @@
-UserSessionsController.class_eval do
+Spree::UserSessionsController.class_eval do
   after_filter :register_gift_card, :only => :create
 
   private

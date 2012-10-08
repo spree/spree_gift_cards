@@ -12,4 +12,3 @@ module SpreeGiftCards
     end
   end
 end
-
